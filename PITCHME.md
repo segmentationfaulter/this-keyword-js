@@ -32,13 +32,15 @@ console.log(message); // => 'Hello World!'
 
 ```js
 function inspectContext() {
-  console.log(this === window)
+  console.assert(this === window)
   this.foo = 'foo'
 }
 
-inspectContext() // true
+inspectContext()
 console.log(window.foo) // 'foo'
 ```
+
+---
 
 ### Function invocation in strict mode
 
@@ -47,11 +49,58 @@ console.log(window.foo) // 'foo'
 ```js
 function inspectContext() {
   'use strict'
-  console.log(this === window)
+  console.assert(this === undefined)
   this.foo = 'foo'
 }
 
-inspectContext() // false
+inspectContext()
 `Uncaught TypeError: Cannot set property 'foo' of undefined`
 ```
 
+---
+
+### Method invocation
+
+```js
+var myObject = {  
+  // helloFunction is a method
+  helloFunction: function() {
+    return 'Hello World!';
+  }
+};
+myObject.helloFunction();  // this is the method invocation
+```
+
+---
+
+### `this` in method invocation
+
+```js
+let obj = {
+  method: function() {
+    console.assert(this === obj)
+  }
+}
+
+obj.method()
+```
+
+---
+
+Pitfall: `this` in an inner function
+
+```js
+let obj = {
+  method: function() {
+    console.assert(this === obj)
+    function inner () {
+      console.assert(this !== obj)
+    }
+    inner()
+  }
+}
+
+obj.method()
+```
+
+---
