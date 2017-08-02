@@ -184,12 +184,12 @@ function foo () {
 }
 
 // calling it standalone
-foo()  // => undefined
+foo()
 
 const bar = { name: 'bar' }
 
 // calling in context of bar
-foo.call(bar) // => 'bar'
+foo.call(bar)
 ```
 
 ---
@@ -247,7 +247,7 @@ const obj = {
   method: () => console.log(this.prop)
 }
 
-obj.method() // => undefined
+obj.method()
 ```
 
 ---
