@@ -14,12 +14,12 @@
 ### Function Invocation
 
 ```js
-function hello(name) {  
-  return 'Hello ' + name + '!';
+function hello(name) {
+  return 'Hello ' + name + '!'
 }
 // Function invocation
-var message = hello('World');  
-console.log(message); // => 'Hello World!'  
+var message = hello('World');
+console.log(message); // => 'Hello World!'
 ```
 
 `hello('World)` is the function invocation
@@ -62,7 +62,7 @@ inspectContext()
 ### Method invocation
 
 ```js
-var myObject = {  
+var myObject = {
   // helloFunction is a method
   helloFunction: function() {
     return 'Hello World!';
