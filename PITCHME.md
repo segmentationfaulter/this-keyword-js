@@ -1,8 +1,8 @@
-# The Notorious  `this`  keyword
+# The  `this`  keyword in JS
 
 ---
 
-### Ways to invoke functions in JS
+#### Ways to invoke functions in JS
 
 * function invocation: `alert('Hello World!')`
 * method invocation: `console.log('Hello World!')`
@@ -11,7 +11,7 @@
 
 ---
 
-### Function Invocation
+#### Function Invocation
 
 ```js
 function hello(name) {
@@ -26,7 +26,7 @@ console.log(message); // => 'Hello World!'
 
 ---
 
-### `this`  in function invocation
+#### `this`  in function invocation
 
 `this` is the `window` object in a function invocation
 
@@ -42,7 +42,7 @@ console.log(window.foo) // 'foo'
 
 ---
 
-### Function invocation in strict mode
+#### Function invocation in strict mode
 
 `this` is `undefined` in a function invocation in strict mode
 
@@ -59,7 +59,7 @@ inspectContext()
 
 ---
 
-### Method invocation
+#### Method invocation
 
 ```js
 var myObject = {
@@ -73,7 +73,7 @@ myObject.helloFunction();  // this is the method invocation
 
 ---
 
-###  `this`  in method invocation
+####  `this`  in method invocation
 
 ```js
 let obj = {
@@ -87,7 +87,7 @@ obj.method()
 
 ---
 
-Pitfall:  `this`  in an inner function
+#### Pitfall:  `this`  in an inner function
 
 ```js
 let obj = {
@@ -105,7 +105,7 @@ obj.method()
 
 ---
 
-### Pitfall: defined as method and invoked as standalone function
+#### Pitfall: defined as method and invoked as standalone function
 
 ```js
 let obj = {
@@ -120,7 +120,7 @@ ref()
 
 ---
 
-### Pitfall: defined as standalone function and invoked as method
+#### Pitfall: defined as standalone function and invoked as method
 
 ```js
 function foo () {
@@ -136,7 +136,7 @@ obj.method()
 
 ---
 
-### Constructor invocation
+#### Constructor invocation
 
 ```js
 function Person (name, age) {
@@ -153,7 +153,7 @@ const harry = new Person('Harry', 15) // this is constructor invocation pattern
 
 ---
 
-### `this`  in constructor invocation
+#### `this`  in constructor invocation
 
 ```js
 function Foo () {
@@ -166,3 +166,66 @@ fooInstance.property // => 'Default value'
 ```
 
 ---
+
+#### Indirect function invocation
+
+There exists a `call` method on every function in javascript
+We can use it to invoke a function with custom value for `this` 
+Here is the signature from mdn.io
+
+`function.call(thisArg, arg1, arg2, ...)`
+
+---
+
+#### Indirect function invocation
+
+```js
+function foo () {
+  console.log(this.name)
+}
+
+const bar = { name: 'bar' }
+
+foo.call(bar) // => 'bar'
+```
+
+---
+
+#### `this`  in arrow functions
+
+Arrow functions don't define their own execution context, they inherit the parent's context.
+Handy to avoid pitfalls like this:
+
+```js
+let obj = {
+  method: function() {
+    console.assert(this === obj)
+    function inner () {
+      console.assert(this !== obj)
+    }
+    inner()
+  }
+}
+
+obj.method()
+```
+
+---
+
+```js
+let obj = {
+  method: function() {
+    console.assert(this === obj)
+    const inner = () => {
+      console.assert(this === obj)
+    }
+    inner()
+  }
+}
+
+obj.method()
+```
+
+---
+
+#### Pitfall with arrow functions
