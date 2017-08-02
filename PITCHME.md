@@ -2,7 +2,7 @@
 
 ---
 
-# Function Invocation Types
+### Function Invocation Types
 
 * function invocation `alert('Hello World!')`
 * method invocation `console.log('Hello World!')`
