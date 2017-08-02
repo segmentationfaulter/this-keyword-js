@@ -22,13 +22,13 @@ var message = hello('World');
 console.log(message); // => 'Hello World!'
 ```
 
-`hello('World)` is the function invocation
+`hello('World')`  is the function invocation
 
 ---
 
 #### `this`  in function invocation
 
-`this` is the `window` object in a function invocation
+`this`  is the  `window`  object in a function invocation
 
 ```js
 function inspectContext() {
@@ -37,14 +37,14 @@ function inspectContext() {
 }
 
 inspectContext()
-console.log(window.foo) // 'foo'
+console.log(window.foo) // => 'foo'
 ```
 
 ---
 
 #### Function invocation in strict mode
 
-`this` is `undefined` in a function invocation in strict mode
+`this`  is  `undefined`  in a function invocation in strict mode
 
 ```js
 function inspectContext() {
@@ -94,7 +94,7 @@ let obj = {
   method: function() {
     console.assert(this === obj)
     function inner () {
-      console.assert(this !== obj)
+      console.assert(this === obj)
     }
     inner()
   }
@@ -136,7 +136,7 @@ obj.method()
 
 ---
 
-#### Constructor invocation
+#### Constructor invocation pattern
 
 ```js
 function Person (name, age) {
@@ -169,8 +169,8 @@ fooInstance.property // => 'Default value'
 
 #### Indirect function invocation
 
-There exists a `call` method on every function in javascript
-We can use it to invoke a function with custom value for `this` 
+There exists a `call` method on every function in javascript.
+We can use it to invoke a function with custom value of `this`.
 Here is the signature from mdn.io
 
 `function.call(thisArg, arg1, arg2, ...)`
@@ -184,9 +184,21 @@ function foo () {
   console.log(this.name)
 }
 
+// calling it standalone
+foo()  // => undefined
+
 const bar = { name: 'bar' }
 
+// calling in context of bar
 foo.call(bar) // => 'bar'
+```
+
+---
+
+#### `this`  in global code
+
+```js
+console.assert(this === window)
 ```
 
 ---
@@ -201,7 +213,7 @@ let obj = {
   method: function() {
     console.assert(this === obj)
     function inner () {
-      console.assert(this !== obj)
+      console.assert(this === obj)
     }
     inner()
   }
@@ -229,3 +241,12 @@ obj.method()
 ---
 
 #### Pitfall with arrow functions
+
+```js
+const obj = {
+  prop: 'val',
+  method: () => console.log(this.prop)
+}
+
+obj.method() // => undefined
+```
