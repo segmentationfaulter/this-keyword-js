@@ -26,7 +26,7 @@ console.log(message); // => 'Hello World!'
 
 ---
 
-### `this` in function invocation
+### `this`  in function invocation
 
 `this` is the `window` object in a function invocation
 
@@ -44,7 +44,7 @@ console.log(window.foo) // 'foo'
 
 ### Function invocation in strict mode
 
-`this` is `undefined` in a function invocation happens in strict mode
+`this` is `undefined` in a function invocation in strict mode
 
 ```js
 function inspectContext() {
@@ -73,7 +73,7 @@ myObject.helloFunction();  // this is the method invocation
 
 ---
 
-### `this` in method invocation
+###  `this`  in method invocation
 
 ```js
 let obj = {
@@ -87,7 +87,7 @@ obj.method()
 
 ---
 
-Pitfall: `this` in an inner function
+Pitfall:  `this`  in an inner function
 
 ```js
 let obj = {
@@ -101,6 +101,68 @@ let obj = {
 }
 
 obj.method()
+```
+
+---
+
+### Pitfall: defined as method and invoked as standalone function
+
+```js
+let obj = {
+  method: function () {
+    console.assert(this === obj)
+  }
+}
+
+const ref = obj.method
+ref()
+```
+
+---
+
+### Pitfall: defined as standalone function and invoked as method
+
+```js
+function foo () {
+  console.assert(this === window)
+}
+
+const obj = {
+  method: foo
+}
+
+obj.method()
+```
+
+---
+
+### Constructor invocation
+
+```js
+function Person (name, age) {
+  this.name = name
+  this.age = age
+}
+
+Person.prototype.grow = function (years) {
+  this.age = this.age + years
+}
+
+const harry = new Person('Harry', 15) // this is constructor invocation pattern
+```
+
+---
+
+### `this`  in constructor invocation
+
+```js
+function Foo () {
+  console.assert(this instanceof Foo)
+  this.property = 'Default value'
+}
+
+const fooInstance = new Foo()
+fooInstance.property // => 'Default value'
 ```
 
 ---
