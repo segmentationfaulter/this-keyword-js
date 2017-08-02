@@ -54,7 +54,7 @@ function inspectContext() {
 }
 
 inspectContext()
-`Uncaught TypeError: Cannot set property 'foo' of undefined`
+// Uncaught TypeError: Cannot set property 'foo' of undefined
 ```
 
 ---
