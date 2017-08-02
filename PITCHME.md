@@ -22,8 +22,6 @@ var message = hello('World');
 console.log(message); // => 'Hello World!'
 ```
 
-`hello('World')`  is the function invocation
-
 ---
 
 #### `this`  in function invocation
@@ -82,7 +80,7 @@ let obj = {
   }
 }
 
-obj.method()
+obj.method() // `this`  will be bound to anything on the left of the dot operator
 ```
 
 ---
@@ -149,6 +147,7 @@ Person.prototype.grow = function (years) {
 }
 
 const harry = new Person('Harry', 15) // this is constructor invocation pattern
+harry.grow(3)
 ```
 
 ---
@@ -250,3 +249,7 @@ const obj = {
 
 obj.method() // => undefined
 ```
+
+---
+
+# Questions???
